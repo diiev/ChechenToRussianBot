@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChechenToRussianBot
 {
@@ -6,7 +7,10 @@ namespace ChechenToRussianBot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Tutor tutor = new Tutor();
+            tutor.AddWord("ж1ал", "собака");
+            Console.WriteLine(tutor.CheckWord("ж1ал", "собак"));
+            
         }
     }
 }
