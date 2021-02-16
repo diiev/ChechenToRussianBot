@@ -6,12 +6,23 @@ namespace ChechenToRussianBot
 {
   public  class Tutor
     {
-        private   Dictionary<string, string> _dic = new Dictionary<string, string>();
-
-        private Random _rand = new Random(); 
-        public void AddWord (string chechen,  string rus)
+        private WordStorage _storage = new WordStorage();
+        private   Dictionary<string, string> _dic;
+        
+        private Random _rand = new Random();
+        
+        public Tutor ()
         {
-            _dic.Add(chechen, rus);
+            _dic = _storage.GetAllWords();
+        }
+        public void AddWord (string chechen,  string rus)
+        {  
+            if (!_dic.ContainsKey(chechen))
+            {
+                _dic.Add(chechen, rus);
+                _storage.AddWord(chechen, rus);
+            }
+           
         } 
 
         public  bool CheckWord (string chechen, string rus)
@@ -25,9 +36,10 @@ namespace ChechenToRussianBot
         }  
         public string GetRandomChechWord ()
         {
-            var r = _rand.Next(0, _dic.Count);
-            var keys = new List<string>(_dic.Keys);
-            return keys[r];
+                var r = _rand.Next(0, _dic.Count);
+                var keys = new List<string>(_dic.Keys);
+                return keys[r];
+  
         }
     }
 }
